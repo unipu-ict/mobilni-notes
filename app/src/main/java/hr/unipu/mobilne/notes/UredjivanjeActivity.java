@@ -40,7 +40,15 @@ public class UredjivanjeActivity extends AppCompatActivity {
     public void spremi_izmjene(View view) {
         if(nova) {
             String naslov = naslovEdit.getText().toString();
+            if(naslov.isEmpty()){
+                Toast.makeText(UredjivanjeActivity.this, "Naslov ne smije biti prazan", Toast.LENGTH_SHORT).show();
+                return;
+            }
             String tekst = tekstEdit.getText().toString();
+            if(tekst.isEmpty()){
+                Toast.makeText(UredjivanjeActivity.this, "Tekst ne smije biti prazan", Toast.LENGTH_SHORT).show();
+                return;
+            }
             Biljeska biljeska = new Biljeska(naslov, tekst);
             if(db.novaBiljeska(biljeska))
                 Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
