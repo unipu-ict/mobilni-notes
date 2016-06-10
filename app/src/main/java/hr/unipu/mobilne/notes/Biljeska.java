@@ -39,4 +39,9 @@ public class Biljeska {
     public void setTekst(String tekst) {
         this.tekst = tekst;
     }
+
+    @Override
+    public String toString() {
+        return naslov;
+    }
 }

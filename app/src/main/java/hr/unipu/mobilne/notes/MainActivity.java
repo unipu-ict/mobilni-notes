@@ -9,8 +9,15 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Baza db;
+    List<Biljeska> sveBiljeske;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,14 +31,19 @@ public class MainActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
                 Intent intent = new Intent(MainActivity.this, UredjivanjeActivity.class);
                 intent.putExtra("nova", true);
                 startActivity(intent);
 
             }
         });
+
+        db = new Baza(this);
+        sveBiljeske = db.listaBiljeski();
+        ListView listaBiljeski = (ListView) findViewById(R.id.listabiljeski);
+        ArrayAdapter<Biljeska> adapter = new ArrayAdapter<Biljeska>(this, android.R.layout.simple_list_item_1, sveBiljeske);
+        listaBiljeski.setAdapter(adapter);
+
     }
 
     @Override
