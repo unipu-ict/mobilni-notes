@@ -69,5 +69,19 @@ public class Baza extends SQLiteOpenHelper {
         return biljeskas;
     }
 
+    public Biljeska nadjiBiljesku(int id) {
+        Biljeska biljeska = new Biljeska();
+        SQLiteDatabase db = this.getWritableDatabase();
+        String querry = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " +id;
+        Cursor cursor = db.rawQuery(querry, null);
+        if (cursor!=null && cursor.moveToFirst()) {
+            biljeska.setId(cursor.getInt(cursor.getColumnIndex(COL_ID)));
+            biljeska.setNaslov(cursor.getString(cursor.getColumnIndex(COL_NASLOV)));
+            biljeska.setTekst(cursor.getString(cursor.getColumnIndex(COL_TEKST)));
+        }
+
+        return biljeska;
+    }
+
 
 }

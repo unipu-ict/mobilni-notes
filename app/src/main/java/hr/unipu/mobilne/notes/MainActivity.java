@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -39,10 +40,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         db = new Baza(this);
-        sveBiljeske = db.listaBiljeski();
+        sveBiljeske = db.listaBiljeski();//spremanje bilješki u listu
         ListView listaBiljeski = (ListView) findViewById(R.id.listabiljeski);
+        //povezivanje liste u memoriji s listom na ekranu
         ArrayAdapter<Biljeska> adapter = new ArrayAdapter<Biljeska>(this, android.R.layout.simple_list_item_1, sveBiljeske);
         listaBiljeski.setAdapter(adapter);
+
+        listaBiljeski.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(MainActivity.this, UredjivanjeActivity.class);
+                intent.putExtra("nova", false);
+                //proslijedi drugoj aktivnosti info koja je bilješka odabrana
+                int odabrana = sveBiljeske.get(position).getId();
+                intent.putExtra("odabrana", odabrana);
+                startActivity(intent);
+            }
+        });
 
     }
 

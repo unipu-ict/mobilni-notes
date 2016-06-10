@@ -9,7 +9,9 @@ import android.widget.Toast;
 public class UredjivanjeActivity extends AppCompatActivity {
 
     boolean nova = false;
+    int odabrana;
     private Baza db;
+
     EditText naslovEdit;
     EditText tekstEdit;
 
@@ -21,11 +23,17 @@ public class UredjivanjeActivity extends AppCompatActivity {
         //dohvat elemenata sučelja
 
         naslovEdit = (EditText) findViewById(R.id.naslov_biljeske);
-
         tekstEdit = (EditText) findViewById(R.id.tekst_biljeske);
 
         if(getIntent().getBooleanExtra("nova", false)) nova = true;//stvaramo novu bilješku, ne uređujemo postojeću
         db = new Baza(this);
+        odabrana = getIntent().getIntExtra("odabrana", 0);
+        if(odabrana!=0) {
+            //ne stvaramo novu bilješku nego čitamo postojeću
+            Biljeska biljeska = db.nadjiBiljesku(odabrana);
+            naslovEdit.setText(biljeska.getNaslov());
+            tekstEdit.setText(biljeska.getTekst());
+        }
 
     }
 
