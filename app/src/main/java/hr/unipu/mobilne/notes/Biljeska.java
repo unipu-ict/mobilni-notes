@@ -11,10 +11,9 @@ public class Biljeska {
 
     public Biljeska() {
     }
-    public Biljeska(String tekst, int id, String naslov) {
-        this.tekst = tekst;
-        this.id = id;
+    public Biljeska(String naslov, String tekst) {
         this.naslov = naslov;
+        this.tekst = tekst;
     }
 
     public int getId() {
