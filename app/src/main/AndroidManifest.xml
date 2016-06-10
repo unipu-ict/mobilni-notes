@@ -18,7 +18,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".UredjivanjeActivity"></activity>
+        <activity android:name=".UredjivanjeActivity" android:parentActivityName=".MainActivity"></activity>
     </application>
 
 </manifest>

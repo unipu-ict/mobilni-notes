@@ -31,7 +31,7 @@
     <Button
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:text="Spremi izmjene"
+        android:text="Spremi"
         android:textSize="20sp"
         android:onClick="spremi_izmjene"
         android:layout_height="wrap_content" />
