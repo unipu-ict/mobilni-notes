@@ -3,8 +3,12 @@ package hr.unipu.mobilne.notes;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Baza extends SQLiteOpenHelper {
     public static final String DATABASE_NAME = "biljeske.db";
@@ -44,6 +48,24 @@ public class Baza extends SQLiteOpenHelper {
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         return result != -1;
+    }
+
+    public List<Biljeska> listaBiljeski() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        List<Biljeska> biljeskas = new ArrayList<>();
+        String querry = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = db.rawQuery(querry, null);
+
+        while (cursor.moveToNext()) {
+            Biljeska biljeska = new Biljeska();
+
+            biljeska.setId(cursor.getInt(cursor.getColumnIndex(COL_ID)));
+            biljeska.setNaslov(cursor.getString(cursor.getColumnIndex(COL_NASLOV)));
+            biljeska.setTekst(cursor.getString(cursor.getColumnIndex(COL_TEKST)));
+
+            biljeskas.add(biljeska);
+        }
+        return biljeskas;
     }
 
 
