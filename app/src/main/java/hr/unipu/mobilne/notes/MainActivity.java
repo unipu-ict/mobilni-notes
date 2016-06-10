@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Baza db;
     List<Biljeska> sveBiljeske;
+    ListView listaBiljeski;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,11 +41,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         db = new Baza(this);
-        sveBiljeske = db.listaBiljeski();//spremanje bilješki u listu
-        ListView listaBiljeski = (ListView) findViewById(R.id.listabiljeski);
-        //povezivanje liste u memoriji s listom na ekranu
-        ArrayAdapter<Biljeska> adapter = new ArrayAdapter<Biljeska>(this, android.R.layout.simple_list_item_1, sveBiljeske);
-        listaBiljeski.setAdapter(adapter);
+        listaBiljeski = (ListView) findViewById(R.id.listabiljeski);
+        napuniListu();
+
 
         listaBiljeski.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -58,6 +57,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void napuniListu() {
+        //spremanje bilješki u listu
+        sveBiljeske = db.listaBiljeski();
+        //povezivanje liste u memoriji s listom na ekranu
+        ArrayAdapter<Biljeska> adapter = new ArrayAdapter<Biljeska>(this, android.R.layout.simple_list_item_1, sveBiljeske);
+        listaBiljeski.setAdapter(adapter);
     }
 
     @Override
@@ -80,5 +87,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        napuniListu();
     }
 }
