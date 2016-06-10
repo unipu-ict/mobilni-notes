@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:text="Spremi izmjene"
         android:textSize="20sp"
+        android:onClick="spremi_izmjene"
         android:layout_height="wrap_content" />
 
 </RelativeLayout>

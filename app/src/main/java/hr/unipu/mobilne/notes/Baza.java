@@ -24,9 +24,10 @@ public class Baza extends SQLiteOpenHelper {
             COL_TEKST + " TEXT " +
             ")";
 
-    public Baza(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
+    public Baza(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
 
     @Override
     public void onCreate(SQLiteDatabase db) {
