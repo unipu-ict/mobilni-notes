@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">Bilješke</string>
-    <string name="action_settings">Settings</string>
-    <string name="brisi_sve">Briši sve bilješke</string>
     <string name="list_title">Bilješke:</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_brisi_sve">Briši sve bilješke</string>
+    <string name="btn_izbrisi">Izbriši</string>
+    <string name="btn_spremi">Spremi</string>
+    <string name="tekst_biljeske">Tekst biljeske</string>
+    <string name="naslov_biljeske">Naslov bilješke</string>
+    <string name="nema_biljeski">NEMA BILJEŠKI</string>
 </resources>

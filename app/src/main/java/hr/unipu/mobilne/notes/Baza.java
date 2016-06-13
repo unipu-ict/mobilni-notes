@@ -48,9 +48,9 @@ public class Baza extends SQLiteOpenHelper {
         return result != -1;
     }
 
-    public boolean izbrisiBiljesku(Biljeska biljeska) {
+    public boolean izbrisiBiljesku(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
-        return db.delete(TABLE_NAME, COL_ID + "=" + biljeska.id, null) > 0;
+        return db.delete(TABLE_NAME, COL_ID + "=" + id, null) > 0;
     }
 
     public boolean izbrisiSveBiljeske() {
@@ -60,7 +60,7 @@ public class Baza extends SQLiteOpenHelper {
 
     public List<Biljeska> listaBiljeski() {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Biljeska> biljeskaList = new ArrayList<>();
+        List<Biljeska> biljeske = new ArrayList<>();
         String querry = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = db.rawQuery(querry, null);
 
@@ -71,9 +71,10 @@ public class Baza extends SQLiteOpenHelper {
             biljeska.setNaslov(cursor.getString(cursor.getColumnIndex(COL_NASLOV)));
             biljeska.setTekst(cursor.getString(cursor.getColumnIndex(COL_TEKST)));
 
-            biljeskaList.add(biljeska);
+            biljeske.add(biljeska);
         }
-        return biljeskaList;
+
+        return biljeske;
     }
 
     public Biljeska nadjiBiljesku(int id) {
