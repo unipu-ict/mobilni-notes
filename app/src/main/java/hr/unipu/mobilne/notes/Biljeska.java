@@ -11,6 +11,7 @@ public class Biljeska {
 
     public Biljeska() {
     }
+
     public Biljeska(String naslov, String tekst) {
         this.naslov = naslov;
         this.tekst = tekst;

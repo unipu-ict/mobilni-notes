@@ -25,10 +25,11 @@ public class UredjivanjeActivity extends AppCompatActivity {
         naslovEdit = (EditText) findViewById(R.id.naslov_biljeske);
         tekstEdit = (EditText) findViewById(R.id.tekst_biljeske);
 
-        if(getIntent().getBooleanExtra("nova", false)) nova = true;//stvaramo novu bilješku, ne uređujemo postojeću
+        if (getIntent().getBooleanExtra("nova", false))
+            nova = true;//stvaramo novu bilješku, ne uređujemo postojeću
         db = new Baza(this);
         odabrana = getIntent().getIntExtra("odabrana", 0);
-        if(odabrana!=0) {
+        if (odabrana != 0) {
             //ne stvaramo novu bilješku nego čitamo postojeću
             Biljeska biljeska = db.nadjiBiljesku(odabrana);
             naslovEdit.setText(biljeska.getNaslov());
@@ -38,22 +39,22 @@ public class UredjivanjeActivity extends AppCompatActivity {
     }
 
     public void spremi_izmjene(View view) {
-        if(nova) {
+        if (nova) {
             String naslov = naslovEdit.getText().toString();
-            if(naslov.isEmpty()){
+            if (naslov.isEmpty()) {
                 Toast.makeText(UredjivanjeActivity.this, "Naslov ne smije biti prazan", Toast.LENGTH_SHORT).show();
                 return;
             }
             String tekst = tekstEdit.getText().toString();
-            if(tekst.isEmpty()){
+            if (tekst.isEmpty()) {
                 Toast.makeText(UredjivanjeActivity.this, "Tekst ne smije biti prazan", Toast.LENGTH_SHORT).show();
                 return;
             }
             Biljeska biljeska = new Biljeska(naslov, tekst);
-            if(db.novaBiljeska(biljeska))
+            if (db.novaBiljeska(biljeska))
                 Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
             else
-                Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();;
+                Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
         }
     }
 }

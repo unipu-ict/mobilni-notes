@@ -1,6 +1,5 @@
 package hr.unipu.mobilne.notes;
 
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -28,7 +27,6 @@ public class Baza extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(SQL_CREATE);
@@ -40,7 +38,6 @@ public class Baza extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-
     public boolean novaBiljeska(Biljeska biljeska) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -51,9 +48,19 @@ public class Baza extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean izbrisiBiljesku(Biljeska biljeska) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, COL_ID + "=" + biljeska.id, null) > 0;
+    }
+
+    public boolean izbrisiSveBiljeske() {
+        SQLiteDatabase db = this.getWritableDatabase();
+        return db.delete(TABLE_NAME, null, null) >= 0;
+    }
+
     public List<Biljeska> listaBiljeski() {
         SQLiteDatabase db = this.getWritableDatabase();
-        List<Biljeska> biljeskas = new ArrayList<>();
+        List<Biljeska> biljeskaList = new ArrayList<>();
         String querry = "SELECT * FROM " + TABLE_NAME;
         Cursor cursor = db.rawQuery(querry, null);
 
@@ -64,17 +71,17 @@ public class Baza extends SQLiteOpenHelper {
             biljeska.setNaslov(cursor.getString(cursor.getColumnIndex(COL_NASLOV)));
             biljeska.setTekst(cursor.getString(cursor.getColumnIndex(COL_TEKST)));
 
-            biljeskas.add(biljeska);
+            biljeskaList.add(biljeska);
         }
-        return biljeskas;
+        return biljeskaList;
     }
 
     public Biljeska nadjiBiljesku(int id) {
         Biljeska biljeska = new Biljeska();
         SQLiteDatabase db = this.getWritableDatabase();
-        String querry = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " +id;
+        String querry = "SELECT * FROM " + TABLE_NAME + " WHERE " + COL_ID + " = " + id;
         Cursor cursor = db.rawQuery(querry, null);
-        if (cursor!=null && cursor.moveToFirst()) {
+        if (cursor != null && cursor.moveToFirst()) {
             biljeska.setId(cursor.getInt(cursor.getColumnIndex(COL_ID)));
             biljeska.setNaslov(cursor.getString(cursor.getColumnIndex(COL_NASLOV)));
             biljeska.setTekst(cursor.getString(cursor.getColumnIndex(COL_TEKST)));
