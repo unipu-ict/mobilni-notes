@@ -1,5 +1,6 @@
 package hr.unipu.mobilne.notes;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,9 +52,10 @@ public class UredjivanjeActivity extends AppCompatActivity {
                 return;
             }
             Biljeska biljeska = new Biljeska(naslov, tekst);
-            if (db.novaBiljeska(biljeska))
+            if (db.novaBiljeska(biljeska)) {
+                startActivity(new Intent(this, MainActivity.class));
                 Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
-            else
+            } else
                 Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
         }
     }

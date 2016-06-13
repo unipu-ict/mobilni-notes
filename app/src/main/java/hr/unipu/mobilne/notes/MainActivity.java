@@ -70,9 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void izbrisiSveBiljeske() {
         db.izbrisiSveBiljeske();
-
         Toast.makeText(MainActivity.this, "Sve bilješke izbrisane", Toast.LENGTH_SHORT).show();
-
         napuniListu();
     }
 
