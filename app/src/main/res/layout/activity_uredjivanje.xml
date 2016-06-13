@@ -10,30 +10,30 @@
     tools:context="hr.unipu.mobilne.notes.UredjivanjeActivity">
 
     <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/naslov_biljeske"
         android:id="@+id/naslov_biljeske"
-        android:layout_marginBottom="20dp"
-        />
-    <EditText
         android:layout_width="match_parent"
-        android:layout_below="@+id/naslov_biljeske"
-        android:hint="@string/tekst_biljeske"
         android:layout_height="wrap_content"
-        android:minLines="8"
-        android:scrollbars="vertical"
-        android:lines="8"
-        android:gravity="top|left"
+        android:layout_marginBottom="20dp"
+        android:hint="@string/naslov_biljeske" />
+
+    <EditText
+        android:id="@+id/tekst_biljeske"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/naslov_biljeske"
+        android:gravity="top|start"
+        android:hint="@string/tekst_biljeske"
         android:inputType="textMultiLine"
-        android:id="@+id/tekst_biljeske" />
+        android:lines="8"
+        android:minLines="8"
+        android:scrollbars="vertical" />
 
     <Button
-        android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:text="@string/btn_spremi"
-        android:textSize="20sp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:onClick="spremi_izmjene"
-        android:layout_height="wrap_content" />
+        android:text="@string/btn_spremi"
+        android:textSize="20sp" />
 
 </RelativeLayout>
