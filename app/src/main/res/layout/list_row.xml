@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:descendantFocusability="blocksDescendants"
+    android:padding="5dip">
+
+    <TextView
+        android:id="@+id/list_biljeska_naslov"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:padding="3dip"
+        android:text="@string/naslov_biljeske"
+        android:textColor="@android:color/primary_text_light"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/list_biljeska_tekst"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/list_biljeska_naslov"
+        android:paddingEnd="1dp"
+        android:paddingStart="3dp"
+        android:text="@string/tekst_biljeske"
+        android:textColor="@android:color/primary_text_light_nodisable"
+        android:textSize="12sp" />
+
+    <Button
+        android:id="@+id/list_biljeska_delete_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="5dp"
+        android:text="@string/btn_izbrisi"
+        tools:ignore="RelativeOverlap" />
+
+</RelativeLayout>

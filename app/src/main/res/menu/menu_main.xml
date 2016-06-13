@@ -6,6 +6,6 @@
         android:id="@+id/action_settings"
         android:orderInCategory="100"
         android:icon="@android:drawable/ic_delete"
-        android:title="Briši sve bilješke"
+        android:title="@string/menu_brisi_sve"
         app:showAsAction="withText" />
 </menu>
