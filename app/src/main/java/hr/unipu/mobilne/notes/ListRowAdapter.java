@@ -12,6 +12,9 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ListRowAdapter extends BaseAdapter {
+    public static final int NASLOV_MAX_LENGTH = 30;
+    public static final int TEKST_MAX_LENGTH = 40;
+
     private DeleteBiljeskaAdapterCallback callback;
     private ArrayList<Biljeska> biljeske = new ArrayList<>();
     private Context context;
@@ -54,10 +57,12 @@ public class ListRowAdapter extends BaseAdapter {
         Biljeska biljeska = biljeske.get(position);
 
         TextView biljeskaNaslov = (TextView) row.findViewById(R.id.list_biljeska_naslov);
-        biljeskaNaslov.setText(biljeska.getNaslov());
+        String naslov = biljeska.getNaslov().length() > NASLOV_MAX_LENGTH ? biljeska.getNaslov().substring(0, NASLOV_MAX_LENGTH) : biljeska.getNaslov();
+        biljeskaNaslov.setText(naslov);
 
         TextView biljeskaTekst = (TextView) row.findViewById(R.id.list_biljeska_tekst);
-        biljeskaTekst.setText(biljeska.getTekst());
+        String tekst = biljeska.getTekst().length() > TEKST_MAX_LENGTH ? biljeska.getTekst().substring(0, TEKST_MAX_LENGTH) + "..." : biljeska.getTekst();
+        biljeskaTekst.setText(tekst);
 
         Button deleteBtn = (Button) row.findViewById(R.id.list_biljeska_delete_btn);
 
