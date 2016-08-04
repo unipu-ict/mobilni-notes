@@ -42,21 +42,33 @@ public class UredjivanjeActivity extends AppCompatActivity {
     public void spremi_izmjene(View view) {
         if (nova) {
             String naslov = naslovEdit.getText().toString();
-            if (naslov.isEmpty()) {
-                Toast.makeText(UredjivanjeActivity.this, "Naslov ne smije biti prazan", Toast.LENGTH_SHORT).show();
-                return;
-            }
             String tekst = tekstEdit.getText().toString();
-            if (tekst.isEmpty()) {
-                Toast.makeText(UredjivanjeActivity.this, "Tekst ne smije biti prazan", Toast.LENGTH_SHORT).show();
-                return;
+
+            if (provjeriPraznaPolja(naslov, tekst)) {
+                //polja nisu prazna, stvori novu bilješku
+                Biljeska biljeska = new Biljeska(naslov, tekst);
+                if (db.novaBiljeska(biljeska)) {
+                    startActivity(new Intent(this, MainActivity.class));
+                    Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
             }
-            Biljeska biljeska = new Biljeska(naslov, tekst);
-            if (db.novaBiljeska(biljeska)) {
-                startActivity(new Intent(this, MainActivity.class));
-                Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
-            } else
-                Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
         }
+
+        if (!nova) {
+            //TODO: provjeri isto što i gore samo umjesto nove bilješke modificiraj postojeću
+        }
+    }
+
+    private boolean provjeriPraznaPolja(String naslov, String tekst) {
+        if (naslov.isEmpty()) {
+            Toast.makeText(UredjivanjeActivity.this, "Naslov ne smije biti prazan", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        if (tekst.isEmpty()) {
+            Toast.makeText(UredjivanjeActivity.this, "Tekst ne smije biti prazan", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
     }
 }
