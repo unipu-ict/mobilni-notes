@@ -24,14 +24,15 @@
         android:gravity="top|start"
         android:hint="@string/tekst_biljeske"
         android:inputType="textMultiLine"
-        android:lines="8"
+        android:lines="10"
         android:minLines="8"
         android:scrollbars="vertical" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20px"
+        android:layout_below="@+id/tekst_biljeske"
         android:onClick="spremi_izmjene"
         android:text="@string/btn_spremi"
         android:textSize="20sp" />
