@@ -48,7 +48,8 @@ public class UredjivanjeActivity extends AppCompatActivity {
                 //polja nisu prazna, stvori novu bilješku
                 Biljeska biljeska = new Biljeska(naslov, tekst);
                 if (db.novaBiljeska(biljeska)) {
-                    startActivity(new Intent(this, MainActivity.class));
+                    //startActivity(new Intent(this, MainActivity.class));
+                    finish();
                     Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
