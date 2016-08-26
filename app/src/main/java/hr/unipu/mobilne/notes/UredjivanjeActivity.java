@@ -50,14 +50,26 @@ public class UredjivanjeActivity extends AppCompatActivity {
                 if (db.novaBiljeska(biljeska)) {
                     //startActivity(new Intent(this, MainActivity.class));
                     finish();
-                    Toast.makeText(UredjivanjeActivity.this, "Bilješka spremljena", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(UredjivanjeActivity.this, "Nova bilješka spremljena", Toast.LENGTH_SHORT).show();
                 } else
                     Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
             }
         }
 
         if (!nova) {
-            //TODO: provjeri isto što i gore samo umjesto nove bilješke modificiraj postojeću
+            String naslov = naslovEdit.getText().toString();
+            String tekst = tekstEdit.getText().toString();
+
+            if (provjeriPraznaPolja(naslov, tekst)) {
+                //polja nisu prazna, spremi izmjene bilješke
+                Biljeska biljeska = new Biljeska(naslov, tekst);
+                biljeska.setId(odabrana);//čitanje id-a bilješke iz intenta, budući da nije nova bilješka
+                if (db.izmijeniBiljesku(biljeska)) {
+                    finish();
+                    Toast.makeText(UredjivanjeActivity.this, "Bilješka izmijenjena", Toast.LENGTH_SHORT).show();
+                } else
+                    Toast.makeText(UredjivanjeActivity.this, "Greška prilikom spremanja", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

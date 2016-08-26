@@ -48,6 +48,17 @@ public class Baza extends SQLiteOpenHelper {
         return result != -1;
     }
 
+    public boolean izmijeniBiljesku(Biljeska biljeska) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(COL_NASLOV, biljeska.getNaslov());
+        contentValues.put(COL_TEKST, biljeska.getTekst());
+        int id = biljeska.getId();
+
+        long result = db.update(TABLE_NAME, contentValues, COL_ID + "="+id, null);
+        return result != -1;
+    }
+
     public boolean izbrisiBiljesku(int id) {
         SQLiteDatabase db = this.getWritableDatabase();
         return db.delete(TABLE_NAME, COL_ID + "=" + id, null) > 0;
